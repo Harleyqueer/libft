@@ -24,22 +24,22 @@ SRC = ft_isalpha.c ft_isdigit.c ft_calloc.c \
       ft_toupper.c ft_tolower.c ft_strdup.c ft_itoa.c ft_strtrim.c ft_strmapi.c \
       ft_striteri.c ft_strlcat.c
 
-SRCBON = ft_lsnew_bonus.c
-OBJ = $(SRC:.c=.o) $(SRCBON:.c=.o)
+SRCBON = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
+	 ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
+	 ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+OBJ = $(SRC:.c=.o)
+OBJBON = $(SRCBON:.c=.o)
 
 all: $(NAME)
 
-bonus: $(OBJ) $(SRCBON:.c=.o)
-	ar rcs $(NAME) $(OBJ) $(SRCBON:.c=.o)
+bonus: $(OBJBON) $(OBJ)
+	ar rcs $(NAME) $(OBJBON) $(OBJ)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJBON)
 
 fclean: clean
 	rm -f $(NAME)
